@@ -1,0 +1,15 @@
+langchain
+langchain-community
+langchainhub
+langchain-openai
+chromadb
+bs4
+python-dotenv
+streamlit
+pypdf
+chromadb
+bs4
+PyPDF2
+faiss-cpu
+langchain_google_genai
+google-generativeai
