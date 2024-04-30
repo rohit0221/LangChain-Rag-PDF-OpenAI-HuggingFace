@@ -1,4 +1,4 @@
-# importing dependencies
+# importing dependencies 
 from dotenv import load_dotenv
 import streamlit as st
 from PyPDF2 import PdfReader
