@@ -75,7 +75,7 @@ def handle_question(question):
 
 def main():
     load_dotenv()
-    st.set_page_config(page_title="Chat with multiple PDFs",page_icon=":books:")
+    st.set_page_config(page_title="Chat with your PDFs💁🏻‍♀️")
     st.write(css,unsafe_allow_html=True)
     if "conversation" not in st.session_state:
         st.session_state.conversation=None
@@ -83,15 +83,15 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history=None
     
-    st.header("Chat with multiple PDFs :books:")
+    st.header("Chat with your PDFs 💁🏻‍♀️")
     question=st.text_input("Ask question from your document:")
     if question:
         handle_question(question)
     with st.sidebar:
-        st.subheader("Your documents")
-        docs=st.file_uploader("Upload your PDF here and click on 'Process'",accept_multiple_files=True)
-        if st.button("Process"):
-            with st.spinner("Processing"):
+        st.subheader("My PDFs")
+        docs=st.file_uploader("Upload your PDF files here and click 'Process'",accept_multiple_files=True)
+        if st.button("Consume my PDFs"):
+            with st.spinner("Processing, hang in there..."):
                 
                 #get the pdf
                 raw_text=get_pdf_text(docs)
