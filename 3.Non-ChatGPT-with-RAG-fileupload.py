@@ -1,5 +1,7 @@
 # importing dependencies 
+import os
 from dotenv import load_dotenv
+load_dotenv()
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -10,7 +12,7 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from htmlTemplates import css, bot_template, user_template
+from html_stylesheet import css, bot_template, user_template
 
 # creating custom template to guide llm model
 custom_template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
@@ -54,9 +56,10 @@ def get_conversationchain(vectorstore):
                                       output_key='answer') # using conversation buffer memory to hold past information
     conversation_chain = ConversationalRetrievalChain.from_llm(
                                 llm=llm,
-                                retriever=vectorstore.as_retriever(),
+                                retriever=vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 6}),
                                 condense_question_prompt=CUSTOM_QUESTION_PROMPT,
                                 memory=memory)
+    
     return conversation_chain
 
 # generating response from user queries and displaying them accordingly

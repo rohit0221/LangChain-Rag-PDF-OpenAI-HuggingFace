@@ -1,5 +1,7 @@
 # importing dependencies
+import os
 from dotenv import load_dotenv
+load_dotenv()
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -9,9 +11,9 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from htmlTemplates import css, bot_template, user_template
+from html_stylesheet import css, bot_template, user_template
 from langchain.llms import HuggingFaceHub
-import os
+
 # creating custom template to guide llm model
 custom_template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
 Chat History:
@@ -49,7 +51,7 @@ def get_vectorstore(chunks):
 # generating conversation chain  
 def get_conversationchain(vectorstore):
 
-    repo_id = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    repo_id = "mistralai/Mixtral-8x22B-v0.1"
     llm = HuggingFaceHub(
     repo_id=repo_id, 
     model_kwargs={"temperature": 0.8, "top_k": 50}, 
